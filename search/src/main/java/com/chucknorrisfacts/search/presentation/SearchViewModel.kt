@@ -11,6 +11,15 @@ class SearchViewModel constructor(private val searchUseCase: SearchUseCase) : Vi
 //    val posts = MutableLiveData <<List<PostItem>>()
     private val compositeDisposable = CompositeDisposable()
 
+    fun getRandomFact() {
+    }
+
+    fun getRandomCategoryFact(category: String) {}
+
+    fun getCategoriesFact() {}
+
+    fun getFact(query: String) {}
+
 //    fun get(query: String) =
 //        compositeDisposable.add(searchUseCase.get(query)
 //            .doOnSubscribe { posts.setLoading() }
@@ -18,10 +27,6 @@ class SearchViewModel constructor(private val searchUseCase: SearchUseCase) : Vi
 //            .map { it.mapToPresentation() }
 //            .subscribe({ posts.setSuccess(it) }, { posts.setError(it.message) })
 //        )
-
-    fun get(query: String) {
-
-    }
 
     override fun onCleared() {
         compositeDisposable.dispose()

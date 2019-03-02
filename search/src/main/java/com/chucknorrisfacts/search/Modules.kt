@@ -17,13 +17,7 @@ import retrofit2.Retrofit
 fun injectFeature() = loadFeature
 
 private val loadFeature by lazy {
-    loadKoinModules(
-        viewModelModule,
-        useCaseModule,
-        repositoryModule,
-        dataSourceModule,
-        networkModule
-    )
+    loadKoinModules(viewModelModule, useCaseModule, repositoryModule, dataSourceModule, networkModule)
 }
 
 val viewModelModule: Module = module {
@@ -38,6 +32,10 @@ val repositoryModule: Module = module {
     single { SearchRepositoryImpl(searchDataSource = get()) as SearchRepository }
 }
 
+private const val BASE_URL = "https://api.chucknorris.io/jokes/"
+private val retrofit: Retrofit = createNetworkClient(BASE_URL, BuildConfig.DEBUG)
+private val chuckNorrisApi: SearchApi = retrofit.create(SearchApi::class.java)
+
 val dataSourceModule: Module = module {
     single { SearchApiImpl(api = chuckNorrisApi) as SearchDataSource }
 }
@@ -45,7 +43,3 @@ val dataSourceModule: Module = module {
 val networkModule: Module = module {
     single { chuckNorrisApi }
 }
-
-private const val BASE_URL = "https://api.chucknorris.io/jokes/"
-private val retrofit: Retrofit = createNetworkClient(BASE_URL, BuildConfig.DEBUG)
-private val chuckNorrisApi: SearchApi = retrofit.create(SearchApi::class.java)
