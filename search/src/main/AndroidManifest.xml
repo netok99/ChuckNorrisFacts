@@ -8,7 +8,7 @@
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".SearchActivity"
+        <activity android:name=".presentation.SearchActivity"
                 android:theme="@style/AppTheme.NoActionBar"/>
 
     </application>
