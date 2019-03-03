@@ -24,6 +24,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/rxkotlin.properties'
+        exclude 'META-INF/rxkotlin_main.kotlin_module'
+    }
     buildToolsVersion '28.0.3'
 }
 

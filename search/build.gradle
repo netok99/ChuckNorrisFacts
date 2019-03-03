@@ -18,24 +18,41 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/rxkotlin.properties'
+        exclude 'META-INF/rxkotlin_main.kotlin_module'
+    }
 }
 
 dependencies {
     implementation project(':network')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation 'com.android.support:appcompat-v7:28.1.1'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test:rules:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support:design:28.1.1'
+    implementation 'com.android.support:support-v4:28.1.1'
+    implementation 'com.android.support:cardview-v7:28.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
+    implementation 'android.arch.persistence.room:runtime:1.1.1'
+
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.squareup.moshi:moshi-kotlin:1.8.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.7'
+
     implementation 'org.koin:koin-core:2.0.0-beta-1'
     implementation 'org.koin:koin-core-ext:2.0.0-beta-1'
     implementation 'org.koin:koin-android:2.0.0-beta-1'
     implementation 'org.koin:koin-android-scope:2.0.0-beta-1'
     implementation 'org.koin:koin-android-viewmodel:2.0.0-beta-1'
-    implementation "org.koin:koin-androidx-scope:2.0.0-beta-1"
-    implementation "org.koin:koin-androidx-viewmodel:2.0.0-beta-1"
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
 repositories {
