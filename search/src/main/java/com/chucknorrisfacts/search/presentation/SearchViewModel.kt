@@ -1,12 +1,10 @@
 package com.chucknorrisfacts.search.presentation
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.chucknorrisfacts.search.usecases.SearchUseCase
+import com.chucknorrisfacts.search.usecases.SearchFactUseCase
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 
-class SearchViewModel constructor(private val searchUseCase: SearchUseCase) : ViewModel() {
+class SearchViewModel constructor(private val searchFactUseCase: SearchFactUseCase) : ViewModel() {
 
 //    val posts = MutableLiveData <<List<PostItem>>()
     private val compositeDisposable = CompositeDisposable()
@@ -21,7 +19,7 @@ class SearchViewModel constructor(private val searchUseCase: SearchUseCase) : Vi
     fun getFact(query: String) {}
 
 //    fun get(query: String) =
-//        compositeDisposable.add(searchUseCase.get(query)
+//        compositeDisposable.add(searchFactUseCase.get(query)
 //            .doOnSubscribe { posts.setLoading() }
 //            .subscribeOn(Schedulers.io())
 //            .map { it.mapToPresentation() }

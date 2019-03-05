@@ -7,25 +7,18 @@ import com.chucknorrisfacts.search.data.remote.SearchApi
 import com.chucknorrisfacts.search.data.remote.SearchApiImpl
 import com.chucknorrisfacts.search.data.repository.SearchRepository
 import com.chucknorrisfacts.search.data.repository.SearchRepositoryImpl
-import com.chucknorrisfacts.search.usecases.SearchUseCase
-import org.koin.android.viewmodel.dsl.viewModel
-import org.koin.core.context.loadKoinModules
-import org.koin.core.module.Module
-import org.koin.dsl.module
+import com.chucknorrisfacts.search.usecases.SearchFactUseCase
+import org.koin.android.viewmodel.ext.koin.viewModel
+import org.koin.dsl.module.Module
+import org.koin.dsl.module.module
 import retrofit2.Retrofit
 
-fun injectFeature() = loadFeature
-
-private val loadFeature by lazy {
-    loadKoinModules(viewModelModule, useCaseModule, repositoryModule, dataSourceModule, networkModule)
-}
-
 val viewModelModule: Module = module {
-    viewModel { SearchViewModel(searchUseCase = get()) }
+    viewModel { SearchViewModel(searchFactUseCase = get()) }
 }
 
 val useCaseModule: Module = module {
-    factory { SearchUseCase(searchRepository = get()) }
+    factory { SearchFactUseCase(searchRepository = get()) }
 }
 
 val repositoryModule: Module = module {
