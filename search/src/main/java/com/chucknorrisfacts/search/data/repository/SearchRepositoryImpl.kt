@@ -14,9 +14,6 @@ class SearchRepositoryImpl constructor(
     override fun saveCategoriesFact(categories: List<String>) =
         searchCacheDataSource.saveCategoriesFact(categories)
 
-    override fun getLocalSearches(): Single<List<String>> =
-        searchCacheDataSource.getSearches()
-
     override fun getRandomFact(): Single<JokeModel> =
         searchRemoteDataSource.getRandomFact()
 
@@ -29,6 +26,9 @@ class SearchRepositoryImpl constructor(
     override fun getFact(query: String): Single<SearchModel> =
         searchRemoteDataSource.getFact(query)
 
-    override fun getLocalSaveSearches(searches: List<String>) =
+    override fun getSearches(): Single<List<String>> =
+        searchCacheDataSource.getSearches()
+
+    override fun saveSearches(searches: List<String>) =
         searchCacheDataSource.saveSearch(searches)
 }

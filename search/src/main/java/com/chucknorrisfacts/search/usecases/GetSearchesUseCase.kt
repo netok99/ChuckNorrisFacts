@@ -5,5 +5,5 @@ import io.reactivex.Single
 
 class GetSearchesUseCase constructor(private val searchRepository: SearchRepository) {
 
-    fun get(): Single<List<String>> = searchRepository.getLocalSearches()
+    fun get(): Single<List<String>> = searchRepository.getSearches()
 }

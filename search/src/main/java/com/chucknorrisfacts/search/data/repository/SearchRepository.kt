@@ -16,7 +16,7 @@ interface SearchRepository {
 
     fun getFact(query: String): Single<SearchModel>
 
-    fun getLocalSearches(): Single<List<String>>
+    fun getSearches(): Single<List<String>>
 
-    fun getLocalSaveSearches(searches: List<String>)
+    fun saveSearches(searches: List<String>)
 }
