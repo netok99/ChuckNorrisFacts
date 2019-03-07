@@ -1,7 +1,7 @@
 package com.chucknorrisfacts.search.data.repository
 
 import com.chucknorrisfacts.search.categories
-import com.chucknorrisfacts.search.data.datasource.SearchDataSource
+import com.chucknorrisfacts.search.data.datasource.SearchRemoteDataSource
 import com.chucknorrisfacts.search.jokeModel
 import com.chucknorrisfacts.search.searchModel
 import com.nhaarman.mockitokotlin2.mock
@@ -14,7 +14,7 @@ import org.junit.Test
 class SearchRepositoryImplTest {
 
     private lateinit var repository: SearchRepositoryImpl
-    private val mockRemoteDataSource: SearchDataSource = mock()
+    private val mockRemoteRemoteDataSource: SearchRemoteDataSource = mock()
 
     private val jokerItem = jokeModel.copy(value = "remote")
     private val searchModelItem = searchModel.copy()
@@ -24,86 +24,86 @@ class SearchRepositoryImplTest {
 
     @Before
     fun setUp() {
-        repository = SearchRepositoryImpl(mockRemoteDataSource)
+        repository = SearchRepositoryImpl(mockRemoteRemoteDataSource)
     }
 
     @Test
     fun `getFact remote success`() {
         val query = "teste"
         // given
-        whenever(mockRemoteDataSource.getFact(query)).thenReturn(Single.just(searchModelItem))
+        whenever(mockRemoteRemoteDataSource.getFact(query)).thenReturn(Single.just(searchModelItem))
 
         // when
         val test = repository.getFact(query).test()
 
         // then
-        verify(mockRemoteDataSource).getFact(query)
+        verify(mockRemoteRemoteDataSource).getFact(query)
         test.assertValue(searchModelItem)
     }
 
     @Test
     fun `getFact remote fail`() {
         val query = "teste"
-        whenever(mockRemoteDataSource.getFact(query)).thenReturn(Single.error(throwable))
+        whenever(mockRemoteRemoteDataSource.getFact(query)).thenReturn(Single.error(throwable))
         val test = repository.getFact(query).test()
 
-        verify(mockRemoteDataSource).getFact(query)
+        verify(mockRemoteRemoteDataSource).getFact(query)
         test.assertError(throwable)
     }
 
     @Test
     fun `getCategoriesFact remote success`() {
-        whenever(mockRemoteDataSource.getCategoriesFact()).thenReturn(Single.just(categoryList))
+        whenever(mockRemoteRemoteDataSource.getCategoriesFact()).thenReturn(Single.just(categoryList))
         val test = repository.getCategoriesFact().test()
 
-        verify(mockRemoteDataSource).getCategoriesFact()
+        verify(mockRemoteRemoteDataSource).getCategoriesFact()
         test.assertValue(categoryList)
     }
 
     @Test
     fun `getCategoriesFact remote fail`() {
-        whenever(mockRemoteDataSource.getCategoriesFact()).thenReturn(Single.error(throwable))
+        whenever(mockRemoteRemoteDataSource.getCategoriesFact()).thenReturn(Single.error(throwable))
         val test = repository.getCategoriesFact().test()
 
-        verify(mockRemoteDataSource).getCategoriesFact()
+        verify(mockRemoteRemoteDataSource).getCategoriesFact()
         test.assertError(throwable)
     }
 
     @Test
     fun `getRandomCategoryFact remote success`() {
         val category = "dev"
-        whenever(mockRemoteDataSource.getRandomCategoryFact(category)).thenReturn(Single.just(jokerItem))
+        whenever(mockRemoteRemoteDataSource.getRandomCategoryFact(category)).thenReturn(Single.just(jokerItem))
         val test = repository.getRandomCategoryFact(category).test()
 
-        verify(mockRemoteDataSource).getRandomCategoryFact(category)
+        verify(mockRemoteRemoteDataSource).getRandomCategoryFact(category)
         test.assertValue(jokerItem)
     }
 
     @Test
     fun `getRandomCategoryFact remote fail`() {
         val category = "dev"
-        whenever(mockRemoteDataSource.getRandomCategoryFact(category)).thenReturn(Single.error(throwable))
+        whenever(mockRemoteRemoteDataSource.getRandomCategoryFact(category)).thenReturn(Single.error(throwable))
         val test = repository.getRandomCategoryFact(category).test()
 
-        verify(mockRemoteDataSource).getRandomCategoryFact(category)
+        verify(mockRemoteRemoteDataSource).getRandomCategoryFact(category)
         test.assertError(throwable)
     }
 
     @Test
     fun `getRandomFact() remote success`() {
-        whenever(mockRemoteDataSource.getRandomFact()).thenReturn(Single.just(jokerItem))
+        whenever(mockRemoteRemoteDataSource.getRandomFact()).thenReturn(Single.just(jokerItem))
         val test = repository.getRandomFact().test()
 
-        verify(mockRemoteDataSource).getRandomFact()
+        verify(mockRemoteRemoteDataSource).getRandomFact()
         test.assertValue(jokerItem)
     }
 
     @Test
     fun `getRandomFact() remote fail`() {
-        whenever(mockRemoteDataSource.getRandomFact()).thenReturn(Single.error(throwable))
+        whenever(mockRemoteRemoteDataSource.getRandomFact()).thenReturn(Single.error(throwable))
         val test = repository.getRandomFact().test()
 
-        verify(mockRemoteDataSource).getRandomFact()
+        verify(mockRemoteRemoteDataSource).getRandomFact()
         test.assertError(throwable)
     }
 }

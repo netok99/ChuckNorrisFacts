@@ -9,6 +9,9 @@
             android:name=".App"
             tools:ignore="GoogleAppIndexingWarning">
 
+        <activity android:name=".presentation.FactsActivity"
+                  android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity android:name=".presentation.SearchActivity"
                   android:theme="@style/AppTheme.NoActionBar"/>
 

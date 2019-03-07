@@ -10,7 +10,13 @@ interface SearchRepository {
 
     fun getRandomCategoryFact(category: String): Single<JokeModel>
 
+    fun saveCategoriesFact(categories: List<String>)
+
     fun getCategoriesFact(): Single<List<String>>
 
     fun getFact(query: String): Single<SearchModel>
+
+    fun getLocalSearches(): Single<List<String>>
+
+    fun getLocalSaveSearches(searches: List<String>)
 }

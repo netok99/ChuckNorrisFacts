@@ -4,7 +4,7 @@ import com.chucknorrisfacts.search.data.model.JokeModel
 import com.chucknorrisfacts.search.data.model.SearchModel
 import io.reactivex.Single
 
-interface SearchDataSource {
+interface SearchRemoteDataSource {
 
     fun getRandomFact(): Single<JokeModel>
 

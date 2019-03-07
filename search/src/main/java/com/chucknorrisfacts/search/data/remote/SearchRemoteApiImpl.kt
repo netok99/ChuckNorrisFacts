@@ -1,11 +1,11 @@
 package com.chucknorrisfacts.search.data.remote
 
-import com.chucknorrisfacts.search.data.datasource.SearchDataSource
+import com.chucknorrisfacts.search.data.datasource.SearchRemoteDataSource
 import com.chucknorrisfacts.search.data.model.JokeModel
 import com.chucknorrisfacts.search.data.model.SearchModel
 import io.reactivex.Single
 
-class SearchApiImpl constructor(private val api: SearchApi) : SearchDataSource {
+class SearchRemoteApiImpl constructor(private val api: SearchApi) : SearchRemoteDataSource {
 
     override fun getRandomFact(): Single<JokeModel> = api.getRandomFact()
 

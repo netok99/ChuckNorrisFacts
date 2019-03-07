@@ -2,7 +2,7 @@ package com.chucknorrisfacts.search.datasource
 
 import com.chucknorrisfacts.search.categories
 import com.chucknorrisfacts.search.data.remote.SearchApi
-import com.chucknorrisfacts.search.data.remote.SearchApiImpl
+import com.chucknorrisfacts.search.data.remote.SearchRemoteApiImpl
 import com.chucknorrisfacts.search.jokeModel
 import com.chucknorrisfacts.search.searchModel
 import com.nhaarman.mockitokotlin2.mock
@@ -12,9 +12,9 @@ import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
 
-class SearchDataSourceImplTest {
+class SearchRemoteDataSourceImplTest {
 
-    private lateinit var dataSource: SearchApiImpl
+    private lateinit var dataSource: SearchRemoteApiImpl
     private val mockApi: SearchApi = mock()
 
     private val jokerItem = jokeModel.copy(value = "remote")
@@ -25,7 +25,7 @@ class SearchDataSourceImplTest {
 
     @Before
     fun setUp() {
-        dataSource = SearchApiImpl(mockApi)
+        dataSource = SearchRemoteApiImpl(mockApi)
     }
 
     @Test
