@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Search</string>
+    <string name="share_fact">Compartilhe esse fato</string>
+    <string name="error_share_fact">Opa! Erro ao compartilhar o fato</string>
+    <string name="toolbar_search_activity">SEARCH FACTS</string>
+    <string name="empty_state_facts_activity">Busque por um fato maravilhoso do mito Chuck Norris</string>
+    <string name="suggestion">Suggestions</string>
+    <string name="past_searches">Past Searches</string>
 </resources>

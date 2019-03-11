@@ -5,7 +5,7 @@ import com.chucknorrisfacts.network.createNetworkClient
 import com.chucknorrisfacts.search.data.datasource.SearchCacheDataSource
 import com.chucknorrisfacts.search.data.datasource.SearchRemoteDataSource
 import com.chucknorrisfacts.search.data.local.SearchCacheDataSourceImpl
-import com.chucknorrisfacts.search.presentation.SearchViewModel
+import com.chucknorrisfacts.search.presentation.search.SearchViewModel
 import com.chucknorrisfacts.search.data.remote.SearchApi
 import com.chucknorrisfacts.search.data.remote.SearchRemoteApiImpl
 import com.chucknorrisfacts.search.data.repository.SearchRepository
