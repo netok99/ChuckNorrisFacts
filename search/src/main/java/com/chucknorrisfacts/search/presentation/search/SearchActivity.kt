@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import android.view.MenuItem
+import android.view.View
 import android.widget.EditText
 import android.widget.GridLayout
 import android.widget.ImageView
@@ -31,16 +32,21 @@ class SearchActivity : AppCompatActivity() {
         initViews()
         setListeners()
 
-        viewModel.searchModel.observe(this, Observer { handleSearch(it) })
-        viewModel.errorMessage.observe(this, Observer { showError(it) })
+        with(viewModel) {
+            searchModel.observe(this@SearchActivity, Observer { handleSearch(it) })
+            errorMessage.observe(this@SearchActivity, Observer { showError(it) })
+            listSearches.observe(this@SearchActivity, Observer { showListSearches(it) })
+            listCategories.observe(this@SearchActivity, Observer { showListCategories(it) })
+            showLoadingArea.observe(this@SearchActivity, Observer { showHideLoadingArea(it) })
+            getSaveSearch()
+            getSaveCategories()
+        }
     }
 
     private fun initViews() {
         initToolbar()
         searchView.isIconified = false
         rootView.requestFocus()
-        loadSuggestion2()
-        loadPastSearches()
     }
 
     private fun initToolbar() {
@@ -73,52 +79,64 @@ class SearchActivity : AppCompatActivity() {
     }
 
     @SuppressLint("SetTextI18n", "InflateParams")
-    private fun loadSuggestion2() {
+    private fun showListCategories(categories: List<String>) =
         gridLayoutSuggestion.apply {
             alignmentMode = GridLayout.ALIGN_BOUNDS
             columnCount = 3
             rowCount = 3
-        }
-        for (i in 0..8) {
-            gridLayoutSuggestion.addView(
-                layoutInflater.inflate(R.layout.item_category, null, false).apply {
-                    categoryTitle.text = "teste$i"
-                    val param = GridLayout.LayoutParams()
-                    param.apply {
-                        height = GridLayout.LayoutParams.WRAP_CONTENT
-                        width = GridLayout.LayoutParams.WRAP_CONTENT
-                        rightMargin = 12
-                        leftMargin = 12
-                        topMargin = 32
-                        setGravity(Gravity.CENTER)
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
-                            rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
+
+            for (index in categories.indices) {
+                val category = categories[index]
+                gridLayoutSuggestion.addView(
+                    layoutInflater.inflate(R.layout.item_category, null, false).apply {
+                        categoryTitle.text = category
+                        val param = GridLayout.LayoutParams()
+                        param.apply {
+                            height = GridLayout.LayoutParams.WRAP_CONTENT
+                            width = GridLayout.LayoutParams.WRAP_CONTENT
+                            rightMargin = 12
+                            leftMargin = 12
+                            topMargin = 32
+                            setGravity(Gravity.CENTER)
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
+                                rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
+                            }
                         }
-                    }
-                    this.layoutParams = param
-                },
-                i)
+                        layoutParams = param
+                        setOnClickListener {
+                            viewModel.getFact(category)
+                        }
+                    },
+                    index
+                )
+            }
         }
-    }
 
     @SuppressLint("InflateParams", "SetTextI18n")
-    private fun loadPastSearches() {
-        for (i in 0..3) {
-            pastSearchList.addView(
-                layoutInflater.inflate(R.layout.item_past_searches, null, false).apply {
-                    searchTitle.text = "teste$i"
-                })
-        }
+    private fun showListSearches(listSearches: List<String>) = listSearches.forEach { search ->
+        pastSearchList.addView(
+            layoutInflater.inflate(R.layout.item_past_searches, null, false).apply {
+                searchTitle.text = search
+                setOnClickListener {
+                    viewModel.getFact(search)
+                }
+            })
     }
 
-    private fun handleSearch(searchModel: SearchModel?) {
-        searchModel?.let { setResult(RESULT_OK, Intent().apply { putExtra(FACTS_EXTRA, searchModel) }) }
+    private fun handleSearch(searchModel: SearchModel?) = searchModel?.let {
+        setResult(RESULT_OK, Intent().apply {
+            putExtra(FACTS_EXTRA, searchModel)
+        })
         finish()
     }
 
     private fun showError(errorMessage: String) =
         Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
+
+    private fun showHideLoadingArea(isShow: Boolean) = with(loadingArea){
+        visibility = if (isShow) View.VISIBLE else View.GONE
+    }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == android.R.id.home) finish()

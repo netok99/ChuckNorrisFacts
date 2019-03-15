@@ -6,6 +6,5 @@ import io.reactivex.Single
 
 class SearchFactUseCase constructor(private val searchRepository: SearchRepository) {
 
-    fun get(query: String): Single<SearchModel> =
-        searchRepository.getFact(query)
+    fun get(query: String): Single<SearchModel> = searchRepository.getFact(query)
 }

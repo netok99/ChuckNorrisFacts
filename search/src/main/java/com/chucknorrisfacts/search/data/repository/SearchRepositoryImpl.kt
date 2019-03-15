@@ -23,6 +23,9 @@ class SearchRepositoryImpl constructor(
     override fun getCategoriesFact(): Single<List<String>> =
         searchRemoteDataSource.getCategoriesFact()
 
+    override fun getLocalCategoriesFact(): Single<List<String>> =
+        searchCacheDataSource.getCategoriesFact()
+
     override fun getFact(query: String): Single<SearchModel> =
         searchRemoteDataSource.getFact(query)
 

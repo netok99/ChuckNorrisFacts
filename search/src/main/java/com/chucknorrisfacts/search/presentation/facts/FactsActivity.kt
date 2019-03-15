@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_facts.*
 class FactsActivity : AppCompatActivity() {
 
     lateinit var factsAdapter: FactsAdapter
+    private var searchModel: SearchModel? = null
 
     companion object {
         const val FACTS_REQUEST_CODE = 1
@@ -33,13 +34,11 @@ class FactsActivity : AppCompatActivity() {
         initFactsList()
     }
 
-    private fun initFactsList() {
-        factsAdapter = FactsAdapter(this)
-        recyclerView.apply {
-            layoutManager = LinearLayoutManager(this@FactsActivity)
-            isNestedScrollingEnabled = false
-            adapter = factsAdapter
-        }
+    private fun initFactsList() = recyclerView.apply {
+        factsAdapter = FactsAdapter(this@FactsActivity)
+        layoutManager = LinearLayoutManager(this@FactsActivity)
+        isNestedScrollingEnabled = false
+        adapter = factsAdapter
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -64,6 +63,7 @@ class FactsActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == FACTS_REQUEST_CODE) {
             data?.getParcelableExtra<SearchModel>(FACTS_EXTRA)?.let {
+                searchModel = it
                 factsAdapter.addFacts(it)
                 emptyState.visibility = View.GONE
                 recyclerView.visibility = View.VISIBLE

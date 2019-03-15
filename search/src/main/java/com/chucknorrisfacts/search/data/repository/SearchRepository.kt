@@ -14,6 +14,8 @@ interface SearchRepository {
 
     fun getCategoriesFact(): Single<List<String>>
 
+    fun getLocalCategoriesFact(): Single<List<String>>
+
     fun getFact(query: String): Single<SearchModel>
 
     fun getSearches(): Single<List<String>>

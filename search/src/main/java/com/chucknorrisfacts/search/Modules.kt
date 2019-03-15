@@ -10,18 +10,30 @@ import com.chucknorrisfacts.search.data.remote.SearchApi
 import com.chucknorrisfacts.search.data.remote.SearchRemoteApiImpl
 import com.chucknorrisfacts.search.data.repository.SearchRepository
 import com.chucknorrisfacts.search.data.repository.SearchRepositoryImpl
-import com.chucknorrisfacts.search.usecases.SearchFactUseCase
+import com.chucknorrisfacts.search.usecases.*
 import org.koin.android.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.Module
 import org.koin.dsl.module.module
 import retrofit2.Retrofit
 
 val viewModelModule: Module = module {
-    viewModel { SearchViewModel(searchFactUseCase = get()) }
+    viewModel {
+        SearchViewModel(
+            searchFactUseCase = get(),
+            saveSearchUseCase = get(),
+            getSearchesUseCase = get(),
+            getSaveCategoriesUseCase = get(),
+            saveCategoriesUseCase = get()
+        )
+    }
 }
 
 val useCaseModule: Module = module {
     factory { SearchFactUseCase(searchRepository = get()) }
+    factory { SaveSearchUseCase(searchRepository = get()) }
+    factory { GetSearchesUseCase(searchRepository = get()) }
+    factory { GetSaveCategoriesUseCase(searchRepository = get()) }
+    factory { SaveCategoriesUseCase(searchRepository = get()) }
 }
 
 val repositoryModule: Module = module {

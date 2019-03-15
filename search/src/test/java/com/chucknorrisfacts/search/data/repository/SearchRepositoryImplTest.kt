@@ -1,6 +1,7 @@
 package com.chucknorrisfacts.search.data.repository
 
 import com.chucknorrisfacts.search.categories
+import com.chucknorrisfacts.search.data.datasource.SearchCacheDataSource
 import com.chucknorrisfacts.search.data.datasource.SearchRemoteDataSource
 import com.chucknorrisfacts.search.jokeModel
 import com.chucknorrisfacts.search.searchModel
@@ -15,6 +16,7 @@ class SearchRepositoryImplTest {
 
     private lateinit var repository: SearchRepositoryImpl
     private val mockRemoteRemoteDataSource: SearchRemoteDataSource = mock()
+    private val mockCacheDataSource: SearchCacheDataSource = mock()
 
     private val jokerItem = jokeModel.copy(value = "remote")
     private val searchModelItem = searchModel.copy()
@@ -24,7 +26,7 @@ class SearchRepositoryImplTest {
 
     @Before
     fun setUp() {
-        repository = SearchRepositoryImpl(mockRemoteRemoteDataSource)
+        repository = SearchRepositoryImpl(mockCacheDataSource, mockRemoteRemoteDataSource)
     }
 
     @Test
