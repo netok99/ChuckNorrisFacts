@@ -45,6 +45,7 @@ class SearchViewModel constructor(
     }
 
     fun getSaveSearch() = compositeDisposable.add(getSearchesUseCase.get()
+        .doOnSubscribe { }
         .subscribeOn(Schedulers.io())
         .subscribe(
             {

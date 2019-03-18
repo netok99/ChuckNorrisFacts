@@ -16,6 +16,10 @@ val searchModel = SearchModel(
     result = listOf(jokeModel)
 )
 
+val categoriesList = listOf("test")
+
+val searchList = listOf("dev", "test")
+
 val categories = listOf(
     "explicit", "dev", "movie", "food", "celebrity", "science", "sport", "political",
     "religion", "animal", "history", "music", "travel", "career", "money", "fashion"

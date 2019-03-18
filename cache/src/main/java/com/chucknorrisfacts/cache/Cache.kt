@@ -27,8 +27,7 @@ class Cache<T> {
 }
 
 class ReactiveCache<T> {
-//    private val book: RxPaperBook = RxPaperBook.with(io())
-    private val book: RxPaperBook = RxPaperBook.with()
+    private val book: RxPaperBook = RxPaperBook.with(io())
 
     fun load(key: String): Single<T> = book.read(key)
 

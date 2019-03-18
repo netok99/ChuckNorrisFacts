@@ -6,4 +6,5 @@
     <string name="empty_state_facts_activity">Busque por um fato maravilhoso do mito Chuck Norris</string>
     <string name="suggestion">Suggestions</string>
     <string name="past_searches">Past Searches</string>
+    <string name="uncategorized_category">UNCATEGORIZED</string>
 </resources>

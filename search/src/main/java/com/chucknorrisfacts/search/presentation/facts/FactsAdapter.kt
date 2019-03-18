@@ -35,7 +35,9 @@ class FactsAdapter(private val context: Context) : RecyclerView.Adapter<Recycler
 
         fun bind(context: Context, item: JokeModel) = with(itemView) {
             title.text = item.value
-            categoryTitle.text = if (item.category.isNullOrEmpty()) "UNCATEGORIZED" else item.category.first()
+            categoryTitle.text = if (item.category.isNullOrEmpty())
+                context.getString(R.string.uncategorized_category) else item.category.first()
+
             share.setOnClickListener {
                 try {
                     context.startActivity(Intent.createChooser(Intent(Intent.ACTION_SEND).apply {
@@ -48,5 +50,4 @@ class FactsAdapter(private val context: Context) : RecyclerView.Adapter<Recycler
             }
         }
     }
-
 }
