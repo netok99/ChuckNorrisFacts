@@ -33,11 +33,21 @@ class SearchActivity : AppCompatActivity() {
         setListeners()
 
         with(viewModel) {
-            searchModel.observe(this@SearchActivity, Observer { handleSearch(it) })
-            errorMessage.observe(this@SearchActivity, Observer { showError(it) })
-            listSearches.observe(this@SearchActivity, Observer { showListSearches(it) })
-            listCategories.observe(this@SearchActivity, Observer { showListCategories(it) })
-            showLoadingArea.observe(this@SearchActivity, Observer { showHideLoadingArea(it) })
+            searchModel.observe(this@SearchActivity, Observer {
+                handleSearch(it)
+            })
+            errorMessage.observe(this@SearchActivity, Observer {
+                showError(it)
+            })
+            listSearches.observe(this@SearchActivity, Observer {
+                showListSearches(it)
+            })
+            listCategories.observe(this@SearchActivity, Observer {
+                showListCategories(it)
+            })
+            showLoadingArea.observe(this@SearchActivity, Observer {
+                showHideLoadingArea(it)
+            })
             getSaveSearch()
             getSaveCategories()
         }
@@ -132,9 +142,9 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun showError(errorMessage: String) =
-        Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
+        Toast.makeText(this, getString(R.string.error_message, errorMessage), Toast.LENGTH_LONG).show()
 
-    private fun showHideLoadingArea(isShow: Boolean) = with(loadingArea){
+    private fun showHideLoadingArea(isShow: Boolean) = with(loadingArea) {
         visibility = if (isShow) View.VISIBLE else View.GONE
     }
 

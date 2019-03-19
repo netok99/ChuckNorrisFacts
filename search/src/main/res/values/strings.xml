@@ -7,4 +7,5 @@
     <string name="suggestion">Suggestions</string>
     <string name="past_searches">Past Searches</string>
     <string name="uncategorized_category">UNCATEGORIZED</string>
+    <string name="error_message">Ocorreu o erro: %1$s. Tente outro termo ou tente mais tarde.</string>
 </resources>

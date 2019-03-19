@@ -8,6 +8,6 @@ class SaveSearchUseCase constructor(private val searchRepository: SearchReposito
         mutableListOf<String>().apply {
             addAll(list)
             add(newItem)
-        }.distinct().take(4)
+        }.distinct().takeLast(4)
     )
 }
