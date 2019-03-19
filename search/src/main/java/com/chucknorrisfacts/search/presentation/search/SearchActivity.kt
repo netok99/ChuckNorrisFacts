@@ -83,11 +83,6 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        searchView.setQuery("", false)
-    }
-
     @SuppressLint("SetTextI18n", "InflateParams")
     private fun showListCategories(categories: List<String>) =
         gridLayoutSuggestion.apply {
